@@ -10,7 +10,7 @@ class MyClient(discord.Client):#?create MyClient class using the discord.import 
         Delete all users messages except the very last message they sent.
         When a message is received event is triggered, take message_id and author of said message
         loop through each message in the channel, if message doesn't match the message that triggered the event then
-        compare with author, if it belongs to the same author then delete that message.
+        compare with author, if it belongs to the same author then delete that message
         """
         print(message.content)
         channel = message.channel
