@@ -1,6 +1,47 @@
 import discord
 from discord.ext import commands
+import sqlite3
 import os
+
+conn = sqlite3.connect('example.db')
+csr = conn.cursor()
+
+def check_table_exists():
+    csr.execute("""SELECT name FROM sqlite_master WHERE type='table' AND name='reacts'""")
+    #test = csr.fetchone()
+    #print(test)
+    if csr.fetchone()!=None:
+        print("table exists")
+    else:
+        print("no table exists, creating")
+        csr.execute('''CREATE TABLE reacts
+                    (alias text, url text)
+                    ''')
+
+def insert(alias, url):
+    csr.execute('''INSERT INTO reacts
+    (alias, url) VALUES
+    (?,?)
+    ''',(alias, url))
+
+def retrieve(alias):
+    csr.execute("""SELECT alias, url FROM reacts WHERE alias = ?""",(alias,))
+    result = csr.fetchall()
+    if result == []:
+        return False
+    else:
+        return result[0][1]
+
+def check_exists(alias):
+    """return true if exists"""
+    csr.execute("""SELECT alias, url FROM reacts WHERE alias = ?""", (alias,))
+    result = csr.fetchall()
+    if result == []:
+        return False
+    else:
+        return True
+
+check_table_exists()
 
 client = commands.Bot(command_prefix = ".")
 
@@ -22,8 +63,10 @@ async def add(ctx, *args):
     only allow unique entries, detect spaces greater or less than 1. return error messages when spaced format incorrect
     """
     found = False
-    added_string = " ".join(args)
-    space_count = added_string.count(" ")
+    added_string = " ".join(args)#put all arges into one string, for the case of multiple words
+    space_count = added_string.count(" ") #count spaces in added_string
+    added_string_alias = added_string.split(" ")[0]  # get word before space
+    added_string_url = added_string.split(" ")[1]
 
     if space_count > 1:
         await ctx.send("error: excess spaces. use only one space. format: <alias> <space> <string>")
@@ -31,34 +74,30 @@ async def add(ctx, *args):
     elif space_count == 0:
         await ctx.send("no space detected, please use format: <alias> <space> <string>")
         return
+    elif check_exists(added_string_alias) == True:
+        await ctx.send("alias already exists, nothing added")
+        return
     else:
-        with open("db.txt", "r") as db_file:
-            for s in db_file.readlines():
-                s = s.rstrip()  # strip newline characters
-                first_word = s.split(" ")[0]  # get word before space
-                added_string_first_word = added_string.split(" ")[0] # get word before space
-                if added_string_first_word == first_word:  # if first word matches then return 'error alias already exists'
-                    await ctx.send("alias already exists, nothing added")
-                    return
-    db_file = open("db.txt", "a")
-    db_file.write(added_string + "\n")
-    await ctx.send("alias added")
+        insert(added_string_alias, added_string_url)
+        conn.commit()  # write changes to db
+        await ctx.send("alias added")
+        return
 
 @client.command()
 async def gif(ctx, *args):
     """SINCE CHANGED compare words before space in db file, return string that matches find_string"""
     find_string = " ".join(args)
-    if find_string.count(" ") != 0:
+    if find_string.count(" ") != 0:#check for spaces
         await ctx.send("error please omit spaces")
         return
-    with open("db.txt", "r") as db_file:
-       for s in db_file.readlines():
-           s = s.rstrip() #strip newline characters
-           first_word = s.split(" ")[0] #get word before space
-           if find_string == first_word: #if first word matches then return second word
-               await ctx.send(s.split(" ")[1])
-               return
-    await ctx.send("alias not found")
+    if check_exists(find_string) == False:
+        await ctx.send("alias not found")
+        return
+    else:
+        found_alias = retrieve(find_string)
+        await ctx.send(found_alias)
+
+
 
 
 
