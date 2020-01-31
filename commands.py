@@ -51,14 +51,17 @@ async def on_ready():
 
 @client.command()
 async def summon(ctx):
-    await ctx.send("yo, what up")
+    """Bot says 'hi'"""
+    await ctx.send("hi")
 
 @client.command()
 async def parrot(ctx, *args):
+    """It's a parrot"""
     await ctx.send(" ".join(args))
 
 @client.command()
 async def add(ctx, *args):
+    """.add <keyword> <url> . Will bind the <keyword> with the <url>. Summon using .gif"""
     """add alias-string to database of space-separated alias-string pairs. only accept one space as space is the delimiter
     only allow unique entries, detect spaces greater or less than 1. return error messages when spaced format incorrect
     """
@@ -85,6 +88,7 @@ async def add(ctx, *args):
 
 @client.command()
 async def gif(ctx, *args):
+    """.gif <keyword>. Will return the associated url."""
     """SINCE CHANGED compare words before space in db file, return string that matches find_string"""
     find_string = " ".join(args)
     if find_string.count(" ") != 0:#check for spaces
@@ -97,6 +101,14 @@ async def gif(ctx, *args):
         found_alias = retrieve(find_string)
         await ctx.send(found_alias)
 
+# @client.command()
+# async def help2(ctx):
+#     await ctx.send("Two modules currently."
+#                    "As you may have noticed it deletes all your messages except the last one"
+#                    "There's also the react module with two commands:"
+#                    ".add <keyword> <url>"
+#                    "This will link the <keyword> with the <url> which can then be summoned with:"
+#                    ".gif <keyword>")
 
 
 
