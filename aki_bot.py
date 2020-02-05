@@ -18,7 +18,7 @@ async def aki_enable(ctx, *args):
         await ctx.send("aki off")
 
 @client.command()
-async def aki2(ctx, *args):
+async def aki(ctx, *args):
     """.aki - start a akinator game"""
     """akinator bot. Guesses what thing you're thinking of"""
     aki = akinator.Akinator() #?create akinator object
