@@ -3,6 +3,7 @@ from discord.ext import commands
 import sqlite3
 import os
 
+#set up database
 conn = sqlite3.connect('example.db')
 csr = conn.cursor()
 
@@ -41,7 +42,7 @@ def check_exists(alias):
     else:
         return True
 
-check_table_exists()
+check_table_exists() #check table exists otherwise create one
 
 client = commands.Bot(command_prefix = ".")
 
@@ -50,14 +51,10 @@ async def on_ready():
     print("logged in")
 
 @client.command()
-async def summon(ctx):
+async def ping(ctx):
     """Bot says 'hi'"""
-    await ctx.send("hi")
+    await ctx.send("React_bot says 'hi'")
 
-@client.command()
-async def parrot(ctx, *args):
-    """It's a parrot"""
-    await ctx.send(" ".join(args))
 
 @client.command()
 async def add(ctx, *args):
