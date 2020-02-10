@@ -1,7 +1,7 @@
 import akinator
 import discord
 from discord.ext import commands
-#import asyncio
+import os
 
 client = commands.Bot(command_prefix = '.')
 users_currently_running = []
@@ -101,6 +101,6 @@ async def on_ready():
 #     while "I know" not in aki_game():
 #         pass
 
+token = os.getenv("JIMBOT_TOKEN")
 
-
-client.run('NjcwNDE3NDYwMjEzNzEwODc5.XiuVDA.PkxhMSP--Df3b2xyHOqF5hGEezg')
+client.run('token')
