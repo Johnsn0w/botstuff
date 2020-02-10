@@ -101,7 +101,7 @@ async def on_ready():
 #     while "I know" not in aki_game():
 #         pass
 
-token = os.getenv("JIMBOT_TOKEN")
+token = os.getenv("JIMSBOT_TOKEN")
 print(token)
 
 client.run('token')
