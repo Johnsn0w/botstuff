@@ -102,5 +102,6 @@ async def on_ready():
 #         pass
 
 token = os.getenv("JIMBOT_TOKEN")
+print(token)
 
 client.run('token')
