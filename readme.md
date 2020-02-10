@@ -3,7 +3,7 @@ So this is a disarray of scripts I'm halfassedly working on as a novice learning
 
 There's undoubtedly a lot wrong with my syntax, commenting, and everything else. So don't expect professional code, things are going to be renamed.
 
-I have tried to make it fairly coherent but the excessive comments inline are basically just an tool for my learning and I'm sure violate basic style guidelines(among other things), but I'll adhere to those soon enough.
+I have tried to make it fairly coherent but the excessive comments inline are basically just an tool for my learning and I'm sure violate basic style guidelines(among other things), but I'll adhere to those guidelines eventualy.
 
 # aki_bot.py
 
