@@ -104,4 +104,4 @@ async def on_ready():
 token = os.getenv("JIMSBOT_TOKEN")
 print(token)
 
-client.run('token')
+client.run(token)
