@@ -175,5 +175,5 @@ async def gif(ctx, *args):
 
 
 
-
-client.run('NjcwNDE3NDYwMjEzNzEwODc5.XiuVDA.PkxhMSP--Df3b2xyHOqF5hGEezg')
+auth_token = os.getenv("JIMSBOT_TOKEN")
+client.run(auth_token)
