@@ -175,5 +175,13 @@ async def gif(ctx, *args):
 
 
 
-auth_token = os.getenv("JIMSBOT_TOKEN")
-client.run(auth_token)
+def main():
+    if os.getenv("JIMSBOT_TOKEN") is None:
+        user_input = None
+        while user_input is None:
+            user_input = input("No Auth Token found, please enter auth token for your bot")
+        auth_token = user_input
+    auth_token = os.getenv("JIMSBOT_TOKEN")
+    client.run(auth_token)
+
+main()
