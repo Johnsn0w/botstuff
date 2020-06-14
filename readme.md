@@ -1,9 +1,7 @@
 
 So this is a disarray of scripts I'm halfassedly working on as a novice learning programming. Most of these ideas have probably been made by someone else already, but I made these to learn not to be original.
 
-There's undoubtedly a lot wrong with my syntax, commenting, and everything else. So don't expect professional code, things are going to be renamed.
-
-I have tried to make it fairly coherent but the excessive comments inline are basically just an tool for my learning and I'm sure violate basic style guidelines(among other things), but I'll adhere to those guidelines eventualy.
+There's a lot wrong with my syntax, commenting, and everything else. I have tried to make it fairly coherent but the excessive comments inline are basically just an tool for my learning and I'm sure violate basic style guidelines.
 
 # aki_bot.py
 
@@ -45,7 +43,8 @@ The result being that each user only ever has one message on the server at a tim
 
 
 This is a bot designed to store images with an alias, and return those images when someone commands the bot using said alias.
- It will accept a url or an attachment. Attachments are stored in sql database as binary, urls are stored as strings.
+It will accept a url or an attachment. Attachments are stored in sql database as binary, urls are stored as strings.
+So it's purpose was for gifs, but you could use it for whatever.
  
  For example:
 
